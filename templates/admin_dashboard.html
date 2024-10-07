@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            background-image: url('static/images/dashboard_wallpaper.jpg'); /* Ganti dengan path gambar Anda */
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        nav {
+            margin: 20px;
+        }
+        nav a {
+            color: white;
+            background-color: #007bff;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        nav a:hover {
+            background-color: #0056b3;
+        }
+        table {
+            background-color: rgba(0, 0, 0, 0.7); /* Latar belakang tabel dengan transparansi */
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        button {
+            color: white; /* Warna teks untuk tombol */
+            background-color: #007bff; /* Warna tombol */
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer; /* Menambahkan kursor pointer untuk tombol */
+        }
+        .upload-form {
+            background-color: rgba(0, 0, 0, 0.7); /* Latar belakang formulir dengan transparansi */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard Admin</h1>
+    <nav>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('upload_warta') }}">Upload Warta Jemaat</a>
+    </nav>
+
+    <h2>Upload Warta Jemaat</h2>
+    <div class="upload-form">
+        <form action="{{ url_for('upload_warta') }}" method="POST" enctype="multipart/form-data">
+            <label for="warta_file">Pilih file warta jemaat:</label>
+            <input type="file" name="warta_file" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <h2>Daftar Profil</h2>
+    <table>
+        <tr>
+            <th>Nama</th>
+            <th>Umur</th>
+            <th>Tanggal Lahir</th>
+            <th>Foto</th>
+            <th>Aksi</th>
+        </tr>
+        {% for profile in profiles %}
+        <tr>
+            <td>{{ profile.name }}</td>
+            <td>{{ profile.age }}</td>
+            <td>{{ profile.birthdate }}</td>
+            <td><img src="{{ profile.photo }}" alt="Foto" style="width: 100px; height: 100px;"></td>
+            <td>
+                <form action="{{ url_for('delete_profile', profile_id=profile['_id']) }}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Daftar Warta Jemaat</h2>
+    <table>
+        <tr>
+            <th>Nama File</th>
+            <th>Aksi</th>
+        </tr>
+        {% for warta in warta_files %}
+        <tr>
+            <td>{{ warta.filename }}</td>
+            <td>
+                <a href="{{ url_for('download_warta', filename=warta.filename) }}">Download</a>
+                <a href="{{ url_for('delete_warta', warta_id=warta._id) }}">Hapus</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Profile</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('https://source.unsplash.com/random/1920x1080');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .profile-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .profile-card:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.4);
+        }
+        .profile-card img {
+            max-width: 100%;
+            border-radius: 10px;
+            border: 2px solid #fff;
+        }
+        .edit-button, .back-button {
+            margin-top: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Profil Pengguna</h1>
+        <div class="row">
+            {% for profile in profiles %}
+                <div class="col-md-4">
+                    <div class="profile-card">
+                        <img src="{{ profile['photo'] }}" alt="Profile Photo">
+                        <h2>{{ profile['name'] }}</h2>
+                        <p>Umur: {{ profile['age'] }}</p>
+                        <p>Tanggal Lahir: {{ profile['birthdate'] }}</p>
+                        <button class="btn btn-primary edit-button" onclick="location.href='{{ url_for('edit_profile', profile_id=profile['_id']) }}'">Edit</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="btn btn-secondary back-button" href="{{ url_for('success') }}">Kembali</a>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

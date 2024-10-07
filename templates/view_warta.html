@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Warta Jemaat</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('https://source.unsplash.com/featured/?church');
+            background-size: cover;
+            background-position: center;
+            color: #333; /* Default text color for better readability */
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent background for readability */
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #5bc0de; /* Softer header color */
+            color: #fff; /* Header text color */
+        }
+        td {
+            color: #333; /* Table cell text color */
+        }
+        a {
+            color: #007bff; /* Link color */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button {
+            background-color: #5bc0de; /* Softer button color */
+            color: white; /* Text color */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: #31b0d5; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Warta Jemaat</h1>
+        <h2 class="text-center">Daftar Warta Jemaat</h2>
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nama File</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for warta in warta_files %}
+                <tr>
+                    <td>{{ warta.filename }}</td>
+                    <td>
+                        {% if warta.filename.endswith('.jpg') or warta.filename.endswith('.jpeg') or warta.filename.endswith('.png') %}
+                            <a class="button" href="{{ url_for('view_image', filename=warta.filename) }}" target="_blank">View Image</a>
+                        {% else %}
+                            <a class="button" href="{{ url_for('download_warta', filename=warta.filename) }}">Download</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="button-container">
+            <a class="button" href="{{ url_for('logout') }}">Logout</a>
+            <a class="button" href="{{ url_for('success') }}">Kembali ke Menu Utama</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

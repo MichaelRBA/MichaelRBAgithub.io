@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('https://source.unsplash.com/random/1920x1080'); /* Ensure this URL matches the one in success.html */
+            background-size: cover;
+            color: white;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px; /* Max width for form */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <form method="POST" enctype="multipart/form-data">
+                <h1 class="text-center">Isi Profil</h1>
+                
+                <div class="form-group">
+                    <label for="name">Nama:</label>
+                    <input type="text" class="form-control" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Umur:</label>
+                    <input type="number" class="form-control" name="age" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="birthdate">Tanggal Lahir:</label>
+                    <input type="date" class="form-control" name="birthdate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="photo">Upload Foto:</label>
+                    <input type="file" class="form-control-file" name="photo" accept="image/*" required>
+                </div>
+                
+                <button type="submit" class="btn btn-success btn-block">Simpan Profil</button>
+                <button type="button" class="btn btn-secondary btn-block" onclick="location.href='{{ url_for('success') }}'">Kembali</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, for interactive components) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

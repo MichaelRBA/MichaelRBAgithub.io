@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+            background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20230328/pngtree-wedding-church-celebration-background-image_2120469.jpg'); /* Replace with your church image URL */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        nav {
+            width: 220px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            display: none; /* Start hidden */
+            position: absolute; /* Positioning the nav */
+            top: 70px; /* Adjust this value as needed */
+            left: 20px;
+            z-index: 10; /* Ensure it's on top */
+        }
+        nav h2 {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 15px 0;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            border-radius: 5px;
+            transition: background 0.3s, padding 0.2s;
+        }
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            padding-left: 20px;
+        }
+        .logout {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .logout:hover {
+            background: #c9302c;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .widget {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .widget:hover {
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .widget h3 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        .widget p {
+            margin: 10px 0 0;
+        }
+        .instructions {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .instructions h3 {
+            margin: 0 0 10px;
+        }
+        .contact-admin {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .footer i {
+            margin-right: 5px;
+        }
+        .clock-widget {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 15px;
+            border-radius: 10px;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .hamburger {
+            cursor: pointer;
+            font-size: 2em;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="hamburger" onclick="toggleNav()">&#9776;</div>
+    <nav id="navbar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('view_profile') }}">Lihat Profil</a></li> 
+            <li><a href="{{ url_for('view_warta') }}">Lihat Warta Jemaat</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <button class="logout" onclick="location.href='{{ url_for('logout') }}'">Logout</button>
+        <h1>Selamat datang, {{ profile_name }}!</h1>
+        <p>Berikut Cara Download Warta Jemaat Tiap Minggu:</p>
+
+        <div class="instructions">
+            <h3>Langkah-langkah:</h3>
+            <ol>
+                <li>Kunjungi halaman <strong>Lihat Warta Jemaat</strong> dari menu di sebelah kiri.</li>
+                <li>Temukan link download untuk Warta Jemaat minggu ini.</li>
+                <li>Klik pada link untuk memulai proses download.</li>
+                <li>Setelah file diunduh, buka file tersebut untuk melihat informasi lengkap.</li>
+            </ol>
+            <p>Gunakan tombol menu (ikon garis tiga di atas) untuk membuka atau menutup menu navigasi.</p>
+        </div>
+
+        <div class="contact-admin">
+            <h3>Butuh Bantuan?</h3>
+            <p>Jika Anda ingin menghapus profil atau akun Anda, silakan hubungi admin di:</p>
+            <p><strong>Email: admin@example.com</strong></p>
+        </div>
+
+        <div class="footer">
+            <p><i class="fab fa-instagram"></i>Follow us on Instagram: <strong>@gpdi_sragen</strong></p>
+            <p><i class="fas fa-map-marker-alt"></i>Lokasi: Jln Raya Sukowati No 327 Sragen</p>
+        </div>
+    </div>
+
+    <div class="clock-widget" id="clock"></div>
+
+    <script>
+        function toggleNav() {
+            const navbar = document.getElementById('navbar');
+            if (navbar.style.display === "none" || navbar.style.display === "") {
+                navbar.style.display = "block"; // Show the navigation
+            } else {
+                navbar.style.display = "none"; // Hide the navigation
+            }
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('id-ID', options);
+            const timeString = now.toLocaleTimeString('id-ID');
+
+            document.getElementById('clock').innerHTML = `<strong>${dateString}</strong><br>${timeString}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to display clock immediately
+    </script>
+</body>
+</html>

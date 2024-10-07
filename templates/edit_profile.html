@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://source.unsplash.com/random/1920x1080');
+            background-size: cover;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+        button {
+            background: green;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: darkgreen;
+        }
+        .back {
+            background: gray;
+        }
+        .back:hover {
+            background: darkgray;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            <h1>Edit Profil</h1>
+            <label for="name">Nama:</label>
+            <input type="text" name="name" value="{{ profile['name'] }}" required>
+            
+            <label for="age">Umur:</label>
+            <input type="number" name="age" value="{{ profile['age'] }}" required>
+            
+            <label for="birthdate">Tanggal Lahir:</label>
+            <input type="date" name="birthdate" value="{{ profile['birthdate'] }}" required>
+            
+            <label for="photo">Upload Foto:</label>
+            <input type="file" name="photo" accept="image/*">
+            
+            <button type="submit">Simpan Perubahan</button>
+            <button type="button" class="back" onclick="location.href='{{ url_for('view_profile') }}'">Kembali</button>
+        </form>
+    </div>
+</body>
+</html>

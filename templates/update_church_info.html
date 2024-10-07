@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Informasi Gereja</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Informasi Gereja</h1>
+    <form action="{{ url_for('update_church_info') }}" method="POST">
+        <label for="name">Nama Gereja:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="address">Alamat:</label>
+        <input type="text" id="address" name="address" required>
+
+        <label for="phone">Nomor Telepon:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="description">Deskripsi:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+
+        <button type="submit">Simpan Informasi</button>
+    </form>
+</body>
+</html>

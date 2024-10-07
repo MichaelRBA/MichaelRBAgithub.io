@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Warta Jemaat</title>
+</head>
+<body>
+    <h1>Upload Warta Jemaat</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="warta_file">Pilih file warta jemaat:</label>
+        <input type="file" name="warta_file" required>
+        <button type="submit">Upload</button>
+    </form>
+    <a href="{{ url_for('admin_dashboard') }}">Kembali ke Dashboard</a>
+</body>
+</html>
