@@ -30,7 +30,7 @@ def dashboard():
     return render_template('dashboard.html')  # Template Anda di sini
 
 # Konfigurasi MongoDB
-app.config["MONGO_URI"] = "mongodb://localhost:27017/your_database"  # Ganti dengan URI MongoDB Anda
+app.config["MONGO_URI"] = "mongodb+srv://michaelrba:michaelrba@clusterzero.eyley3u.mongodb.net/Gereja?retryWrites=true&w=majority"
 mongo = PyMongo(app)
 
 # Folder untuk menyimpan warta jemaat
@@ -133,7 +133,7 @@ def create_admin():
         else:
             return "Admin sudah ada."
 
-    return render_template('create_admin.html')  # Tampilkan form jika GET
+    return render_template('create_admin.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
